@@ -1,12 +1,20 @@
 import React from 'react';
 
-class ItemList extends React.Component {
-    render() {
+const ItemList = props => {
+    if(props.items && props.items.length > 0) {
         return (
             <div>
-                <form onSubmit={e => e.preventDefault()}>
-                    <input value={this.props.currentQuery} onChange={e => this.props.handleOnChange(e)}></input>
-                </form>
+                <ul>
+                {props.items.map(item => {
+                    return <li key={item.sku}>{item.name} | ${item.price}</li>
+                })}
+                </ul>
+            </div>
+        );
+    } else {
+        return (
+            <div>
+                No items matched!
             </div>
         );
     }
