@@ -1,13 +1,23 @@
 import React from 'react';
+import SearchBar from './SearchBar';
 
-export default class POS extends React.Component {
+class POS extends React.Component {
     state = {
-        search: ''
+        query: ''
+    }
+
+    handleSearchChange = (e) => {
+        this.setState({ query: e.target.value });
     }
 
     render() {
         return (
-            <div>POS!</div>
+            <div>
+                <SearchBar currentQuery={this.state.query} handleOnChange={this.handleSearchChange} />
+                Submitted query: {this.state.query}
+            </div>
         );
     }
 }
+
+export default POS;
