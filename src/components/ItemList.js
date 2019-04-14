@@ -6,7 +6,11 @@ const ItemList = props => {
             <div>
                 <ul>
                 {props.items.map(item => {
-                    return <li key={item.sku}>{item.name} | ${item.price}</li>
+                    return (
+                        <li onClick={() => props.handleAddToCart(item.sku)} key={item.sku}>
+                            {item.name.toUpperCase()} | ${item.price}
+                        </li>
+                    );
                 })}
                 </ul>
             </div>
