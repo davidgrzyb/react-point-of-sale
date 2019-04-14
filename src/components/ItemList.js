@@ -4,10 +4,10 @@ const ItemList = props => {
     if(props.items && props.items.length > 0) {
         return (
             <div>
-                <ul>
+                <ul className="list-group">
                 {props.items.map(item => {
                     return (
-                        <li onClick={() => props.handleAddToCart(item.sku)} key={item.sku}>
+                        <li className="list-group-item" onClick={() => props.handleAddToCart(item.sku)} key={item.sku}>
                             {item.name.toUpperCase()} | ${item.price}
                         </li>
                     );
@@ -18,7 +18,7 @@ const ItemList = props => {
     } else {
         return (
             <div>
-                No items matched!
+                No items found!
             </div>
         );
     }

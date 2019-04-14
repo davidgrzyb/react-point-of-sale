@@ -40,7 +40,7 @@ class POS extends React.Component {
         // If found - update cart
         if(filtered) {
             items.push(filtered[0]);
-            console.log(filtered[0]);
+            // console.log(filtered[0]);
             this.setState({ cartItems: items });
         } else {
             console.log("No item found to match selected item.");
@@ -54,7 +54,7 @@ class POS extends React.Component {
         this.state.matchedItems.filter((item) => {
             // if found
             if(item.sku === sku) {
-                console.log(item);
+                // console.log(item);
                 items.pop(item);
                 this.setState({ cartItems: items });
             }
@@ -63,10 +63,14 @@ class POS extends React.Component {
 
     render() {
         return (
-            <div>
-                <SearchBar currentQuery={this.state.query} handleOnChange={this.handleSearchChange} />
-                <ItemList items={this.state.matchedItems} handleAddToCart={this.addToCart} />
-                <Cart items={this.state.cartItems} handleRemoveFromCart={this.removeFromCart} />
+            <div className="row">
+                <div className="col-md-4">
+                    <SearchBar currentQuery={this.state.query} handleOnChange={this.handleSearchChange} />
+                    <ItemList items={this.state.matchedItems} handleAddToCart={this.addToCart} />
+                </div>
+                <div className="col">
+                    <Cart items={this.state.cartItems} handleRemoveFromCart={this.removeFromCart} />
+                </div>
             </div>
         );
     }
