@@ -22,16 +22,15 @@ class POS extends React.Component {
         this.setState({ matchedItems: matches });
     }
 
-    handleSearchChange = (e) => {
+    handleSearchChange = e => {
         this.setState({ query: e.target.value.toUpperCase() });
         this.filterItems();
     }
 
-    addToCart = (sku) => {
+    addToCart = sku => {
         let items = this.state.cartItems;
 
         // Finding item
-        // let filtered = null;
         let filtered = this.state.matchedItems.filter((item) => {
             if(item.sku === sku) {
                 return item;
@@ -48,12 +47,26 @@ class POS extends React.Component {
         }
     }
 
+    removeFromCart = sku => {
+        let items = this.state.cartItems;
+
+        // Finding item
+        this.state.matchedItems.filter((item) => {
+            // if found
+            if(item.sku === sku) {
+                console.log(item);
+                items.pop(item);
+                this.setState({ cartItems: items });
+            }
+        });
+    }
+
     render() {
         return (
             <div>
                 <SearchBar currentQuery={this.state.query} handleOnChange={this.handleSearchChange} />
                 <ItemList items={this.state.matchedItems} handleAddToCart={this.addToCart} />
-                <Cart items={this.state.cartItems} />
+                <Cart items={this.state.cartItems} handleRemoveFromCart={this.removeFromCart} />
             </div>
         );
     }
