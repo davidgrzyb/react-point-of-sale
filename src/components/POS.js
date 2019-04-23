@@ -8,7 +8,10 @@ class POS extends React.Component {
     state = {
         query: '',
         matchedItems: null,
-        cartItems: {}
+        cartItems: {},
+        itemTotal: 0,
+        tax: 0,
+        total: 0
     }
 
     filterItems = () => {
@@ -49,6 +52,7 @@ class POS extends React.Component {
                 items[sku] = filtered[0];
                 this.setState({ cartItems: items });
             }
+            this.calculateTotals();
         } else {
             console.log("No item found to match selected item.");
         }
@@ -58,12 +62,14 @@ class POS extends React.Component {
         let items = this.state.cartItems;
         delete items[sku];
         this.setState({ cartItems: items });
+        this.calculateTotals();
     }
 
     increaseQuantity = sku => {
         let items = this.state.cartItems;
         items[sku].quantity += 1;
         this.setState({ cartItems: items });
+        this.calculateTotals();
     }
 
     decreaseQuantity = sku => {
@@ -71,7 +77,22 @@ class POS extends React.Component {
         if(items[sku].quantity > 1) {
             items[sku].quantity -= 1;
             this.setState({ cartItems: items });
+            this.calculateTotals();
         }
+    }
+
+    calculateTotals = () => {
+        let total = 0;
+        // Calculate totals from current items in the cart
+        Object.entries(this.state.cartItems).map(item => {
+            total += item[1].price * item[1].quantity;
+        });
+
+        this.setState({
+            itemTotal: total,
+            tax: total * 0.13,
+            total: total * 1.13
+        });
     }
 
     render() {
@@ -95,7 +116,11 @@ class POS extends React.Component {
                         />
                     </div>
                     <div className="col-md-4">
-                        <TotalPanel items={this.state.cartItems} />
+                        <TotalPanel
+                            itemTotal={this.state.itemTotal}
+                            tax={this.state.tax}
+                            total={this.state.total}
+                        />
                     </div>
                 </div>
             </div>
