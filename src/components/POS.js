@@ -7,7 +7,7 @@ import TotalPanel from './TotalPanel';
 class POS extends React.Component {
     state = {
         query: '',
-        matchedItems: null,
+        matchedItems: this.props.items,
         cartItems: {},
         itemTotal: 0,
         tax: 0,
