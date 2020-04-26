@@ -85,7 +85,7 @@ class POS extends React.Component {
         let total = 0;
         // Calculate totals from current items in the cart
         Object.entries(this.state.cartItems).map(item => {
-            total += item[1].price * item[1].quantity;
+            return total += item[1].price * item[1].quantity;
         });
 
         this.setState({
@@ -104,7 +104,7 @@ class POS extends React.Component {
                 </div>
                 <div className="w-full md:w-2/3">
                     <div className="flex flex-wrap">
-                        <div className="w-full md:w-1/2 pr-0 md:pr-6 mt-4 md:mt-0">
+                        <div className="w-full md:w-2/3 pr-0 md:pr-6 mt-4 md:mt-0">
                             <Cart 
                                 items={this.state.cartItems} 
                                 handleRemoveFromCart={this.removeFromCart} 
@@ -112,7 +112,7 @@ class POS extends React.Component {
                                 handleDecreaseQuantity={this.decreaseQuantity} 
                             />
                         </div>
-                        <div className="w-full md:w-1/2 mt-4 md:mt-0">
+                        <div className="w-full md:w-1/3 mt-4 md:mt-0">
                             <TotalPanel
                                 itemTotal={this.state.itemTotal}
                                 tax={this.state.tax}
