@@ -97,30 +97,28 @@ class POS extends React.Component {
 
     render() {
         return (
-            <div>
-                <div className="row">
-                    <div className="col-md-4">
-                        <SearchBar currentQuery={this.state.query} handleOnChange={this.handleSearchChange} />
-                    </div>
+            <div className="flex flex-wrap p-2 md:p-0">
+                <div className="w-full md:w-1/3 pr-0 md:pr-6">
+                    <SearchBar currentQuery={this.state.query} handleOnChange={this.handleSearchChange} />
+                    <ItemList items={this.state.matchedItems} handleAddToCart={this.addToCart} />
                 </div>
-                <div className="row">
-                    <div className="col-md-4">
-                        <ItemList items={this.state.matchedItems} handleAddToCart={this.addToCart} />
-                    </div>
-                    <div className="col-md-4">
-                        <Cart 
-                            items={this.state.cartItems} 
-                            handleRemoveFromCart={this.removeFromCart} 
-                            handleIncreaseQuantity={this.increaseQuantity} 
-                            handleDecreaseQuantity={this.decreaseQuantity} 
-                        />
-                    </div>
-                    <div className="col-md-4">
-                        <TotalPanel
-                            itemTotal={this.state.itemTotal}
-                            tax={this.state.tax}
-                            total={this.state.total}
-                        />
+                <div className="w-full md:w-2/3">
+                    <div className="flex flex-wrap">
+                        <div className="w-full md:w-1/2 pr-0 md:pr-6 mt-4 md:mt-0">
+                            <Cart 
+                                items={this.state.cartItems} 
+                                handleRemoveFromCart={this.removeFromCart} 
+                                handleIncreaseQuantity={this.increaseQuantity} 
+                                handleDecreaseQuantity={this.decreaseQuantity} 
+                            />
+                        </div>
+                        <div className="w-full md:w-1/2 mt-4 md:mt-0">
+                            <TotalPanel
+                                itemTotal={this.state.itemTotal}
+                                tax={this.state.tax}
+                                total={this.state.total}
+                            />
+                        </div>
                     </div>
                 </div>
             </div>
